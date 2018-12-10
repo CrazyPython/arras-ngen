@@ -1584,6 +1584,7 @@ const dirtyCheck = (p, r) => { return entitiesToAvoid.some(e => { return Math.ab
 const grid = new hshg.HSHG();
 var entitiesIdLog = 0;
 var entities = [];
+const entitiesToRemove = []
 const purgeEntities = () => { entities = entities.filter(e => { return !e.isGhost; }); };
 
 var bringToLife = (() => {
@@ -2624,6 +2625,7 @@ class Entity {
         // Remove from the collision grid
         this.removeFromGrid();
         this.isGhost = true;
+        entitiesToRemove.push(this)
     }    
     
     isDead() {
@@ -2947,7 +2949,7 @@ var express = require('express'),
             } 
         }
         // Remove them
-        purgeEntities();
+        //purgeEntities();
         // Build the function to return
         let writeData = JSON.stringify(mockupData);
         return loc => {
@@ -4672,7 +4674,7 @@ var gameloop = (() => {
         logs.entities.mark();
         logs.master.mark();
         // Remove dead entities
-        purgeEntities();
+        //purgeEntities();
         room.lastCycle = util.time();
     };
     //let expected = 1000 / c.gameSpeed / 30;

@@ -1,0 +1,4 @@
+ {
+    "presets": [],
+    "plugins": ["../babel-transform-ngen-loop"]
+}
